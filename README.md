@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>AI Dil Öğretmeni Demo</title>
+<style>
+body { font-family: Arial; background:#f0f0f0; padding:30px; }
+.box { background:white; padding:20px; max-width:600px; margin:auto; border-radius:10px; }
+h2 { text-align:center; }
+textarea { width:100%; height:120px; padding:10px; font-size:16px; margin-top:10px; }
+button { margin-top:10px; padding:10px 20px; font-size:16px; cursor:pointer; display:block; margin-left:auto; margin-right:auto; }
+#answer { margin-top:20px; background:#e0ffe0; padding:15px; border-radius:10px; min-height:50px; }
+.msg-user { background:#d7eaff; padding:10px; border-radius:8px; margin-bottom:10px; }
+.msg-ai { background:#e8ffe5; padding:10px; border-radius:8px; margin-bottom:10px; }
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>AI Dil Öğretmeni Demo</h2>
+<p>Anlamadığın konuyu yaz:</p>
+<textarea id="text"></textarea>
+<button onclick="send()">Gönder</button>
+<div id="answer"></div>
+</div>
+
+<script>
+function send() {
+  const userText = document.getElementById("text").value.trim().toLowerCase();
+  const answerDiv = document.getElementById("answer");
+  
+  if(!userText) {
+    answerDiv.innerHTML = "Lütfen bir şeyler yazın!";
+    return;
+  }
+
+  answerDiv.innerHTML = `<div class="msg-user">👤 Öğrenci: ${userText}</div>`;
+
+  let reply = "Özür dilerim, bunu anlamadım. Lütfen başka şekilde sor.";
+
+  if(userText.includes("past tense")) {
+    reply = "Simple Past geçmişte olmuş olaylar için kullanılır. Örnek: I walked to school yesterday.";
+  } else if(userText.includes("have to")) {
+    reply = "‘Have to’ zorunluluk belirtir. Örnek: I have to study tonight.";
+  } else if(userText.includes("going to")) {
+    reply = "'Going to' geleceği anlatır. Örnek: I am going to buy a car.";
+  }
+
+  answerDiv.innerHTML += `<div class="msg-ai">🤖 Öğretmen: ${reply}</div>`;
+}
+</script>
+
+</body>
+</html>
